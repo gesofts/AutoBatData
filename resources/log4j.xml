@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="GB2312" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- 定义日志输出方式，name和class是必须的 下面定义的是控制台输出方式 -->
+	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="info"></param>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5m%n"></param>
+		</layout>
+	</appender>
+	<appender name="receivecommand" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="log/receivecommand/receivecommand.log"></param>
+		<param name="ImmediateFlush" value="true" />
+		<param name="Threshold" value="info"></param>
+		<param name="Append" value="true"></param>
+		<param name="MaxFileSize" value="3000KB"></param>
+		<param name="MaxBackupIndex" value="100"></param>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5m%n"></param>
+		</layout>
+	</appender>
+	<appender name="sendcommand" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="log/sendcommand/sendcommand.log"></param>
+		<param name="ImmediateFlush" value="true" />
+		<param name="Threshold" value="info"></param>
+		<param name="Append" value="true"></param>
+		<param name="MaxFileSize" value="3000KB"></param>
+		<param name="MaxBackupIndex" value="100"></param>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5m%n"></param>
+		</layout>
+	</appender>
+
+	<appender name="RollingFile" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="log/rollingdata.log"></param>
+		<param name="ImmediateFlush" value="true" />
+		<param name="Threshold" value="info"></param>
+		<param name="Append" value="true"></param>
+		<param name="MaxFileSize" value="3000KB"></param>
+		<param name="MaxBackupIndex" value="100"></param>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger[%L] - %m%n"></param>
+		</layout>
+	</appender>
+	<!-- 输出到控制台和文件，可定义更多的 Appender -->
+
+	<!-- 定义日志的根节点 level是记录等级 -->
+	<logger name="receivecommand" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="receivecommand" />
+	</logger>
+
+	<logger name="sendcommand" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="sendcommand" />
+	</logger>
+	<root>
+		<priority value="INFO" />
+		<appender-ref ref="stdout" />
+		<appender-ref ref="RollingFile" />
+	</root>
+
+</log4j:configuration>
